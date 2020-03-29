@@ -6,22 +6,6 @@ import time
 import vars
 
 
-# ________________________________________________________________________
-# Chapter 1 Tutorial
-# browser = webdriver.Firefox()
-
-# browser.get(vars.my_localhost)
-
-# try:
-#     assert 'To-Do' in browser.title, "Browser title was " + browser.title
-#     print("Django success")
-# except:
-#     print("Django didn't work")
-
-# browser.quit()
-
-# ________________________________________________________________________
-
 class NewVisitorTest(unittest.TestCase):
 
     def setUp(self):
@@ -52,7 +36,8 @@ class NewVisitorTest(unittest.TestCase):
         table = self.browser.find_element_by_id('id_list_table')
         rows = table.find_elements_by_tag_name('tr')
         self.assertTrue(
-            any(row.text == '1: Buy peacock feathers' for row in rows)
+            any(row.text == '1: Buy peacock feathers' for row in rows),
+            msg="New to-do item did not appear in table"
         )
 
         self.fail('Finish the test!')
