@@ -29,15 +29,32 @@ class NewVisitorTest(unittest.TestCase):
             'Enter a to-do item'
         )
 
+        # user enters text for to-do list item
         inputbox.send_keys('Buy peacock feathers')
         inputbox.send_keys(Keys.ENTER)
-        time.sleep(3)
+        time.sleep(2)
 
+        # test the input
         table = self.browser.find_element_by_id('id_list_table')
         rows = table.find_elements_by_tag_name('tr')
-        # this test is not showing anything in the table, retrace steps from page 59
-        self.assertIn('1: Buy peacock feathers', [row.text for row in rows])
+        self.assertIn(
+            '1: Buy peacock feathers', 
+            [row.text for row in rows]
+        )
 
+        # user enters second item
+        inputbox = self.browser.find_element_by_id('id_new_item')
+        inputbox.send_keys('Use peacock feathers to make a fly')
+        inputbox.send_keys(Keys.ENTER)
+        time.sleep(2)
+
+        # test the input
+        table = self.browser.find_element_by_id('id_list_table')
+        rows = table.find_elements_by_tag_name('tr')
+        self.assertIn(
+            '2: Use peacock feathers to make a fly', 
+            [row.text for row in rows]
+        )
         self.fail('Finish the test!')
 
 
